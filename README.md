@@ -10,7 +10,25 @@
 
 > **Questão de pesquisa:** até que ponto fontes ou mecanismos físicos específicos que perturbam um qubit podem ser individualizados matematicamente a partir de suas dinâmicas, parâmetros e observações — e quando diferentes fontes se tornam indistinguíveis no sistema reduzido?
 
-**Comece aqui:** [visão científica](#1-visão-geral-científica) · [resultados](#3-resultados-e-evidências) · [reprodução](#5-instalação-e-reprodução) · [limitações](#7-limitações-e-status-epistemológico) · [release oficial](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2)
+## Um objetivo central: a tríade Agente Causal – Ruído – Entropia
+
+A IC investiga **como uma fonte física específica produz uma interação, como essa interação se manifesta como ruído em relação à computação pretendida e como o estado resultante pode ser caracterizado informacionalmente**. A tríade organiza três conceitos distintos — **origem, efeito dinâmico e medida do estado** — sem tratá-los como equivalentes.
+
+$$
+\underbrace{A_k}_{\text{Agente Causal}}
+\xrightarrow{\;\text{interação física}\;}
+\underbrace{\mathcal{E}_{k,t}}_{\text{dinâmica}}
+\xrightarrow{\;\rho_S(0)\;}
+\underbrace{\rho'_{S,k}(t)}_{\text{estado resultante}}
+\xrightarrow{\;\text{comparação e métricas}\;}
+\underbrace{\left\{N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots\right\}}_{\text{assinatura observável}}.
+$$
+
+Aqui, o **ruído** é caracterizado operacionalmente pelo desvio em relação à evolução ideal, enquanto a **entropia** é apenas uma das métricas da resposta do estado. **Uma perturbação pode existir com $\Delta S=0$**; aumento de entropia não é consequência universal de todo ruído. A caracterização conjunta é um objetivo científico da IC, **não uma prova automática da identidade do agente**.
+
+**Aprofundamento:** [fundamentação, equações, resultados e limites da tríade](docs/TRIADE_AGENTE_CAUSAL_RUIDO_ENTROPIA.md).
+
+**Comece aqui:** [tríade Agente–Ruído–Entropia](docs/TRIADE_AGENTE_CAUSAL_RUIDO_ENTROPIA.md) · [visão científica](#1-visão-geral-científica) · [resultados](#3-resultados-e-evidências) · [reprodução](#5-instalação-e-reprodução) · [limitações](#7-limitações-e-status-epistemológico) · [release oficial](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2)
 
 ## Resumo executivo
 
@@ -122,19 +140,44 @@ Isso evidencia uma **limitação de identificabilidade** no nível observado e m
 
 *Frações de condições com assinaturas próximas segundo o critério numérico do v1. A figura depende do conjunto de estados, tempos, parâmetros e tolerâncias selecionados.*
 
-### 3.2 Agente, ruído e entropia
+### 3.2 Tríade Agente Causal – Ruído – Entropia: relação e evidência
 
-Uma perturbação pode alterar o estado sem alterar sua entropia. No controle unitário do v1, o maior $|\Delta S|$ registrado foi da ordem de $8{,}01\times 10^{-16}$, embora a distância de traço relativa à entrada alcançasse `1` em condições simuladas.
+A tríade é **um dos objetivos explícitos da IC**: conectar a *origem física modelada* ($A_k$), a *perturbação dinâmica observada* em relação à operação computacional pretendida e a *resposta informacional do estado*, sem confundir esses conceitos.
+
+| Dimensão | Pergunta científica | Representação |
+| --- | --- | --- |
+| **Agente Causal** | Qual mecanismo/fonte foi modelado como responsável pela interação? | $A_k$ e seus parâmetros físicos |
+| **Ruído observado** | Como a dinâmica real se afasta da evolução ideal para um estado de prova e um tempo definidos? | $\mathcal{E}_{k,t}$, $\rho'_{S,k}$ e distância ao alvo |
+| **Entropia** | Como mudou o espectro e o grau de mistura do estado? | $S(\rho)$, $\Delta S_k$ e métricas complementares |
+
+A interação é representada por um Hamiltoniano, canal ou dilatação sistema–ambiente apropriados ao regime. Tomando a evolução computacional de referência $\mathcal{G}_t$, a comparação operacional pode ser escrita como:
 
 $$
-\Delta S=0
-\;\not\Rightarrow\;
-\text{ausência de perturbação}.
+\rho'_{S,k}(t)=\mathcal{E}_{k,t}(\rho_S(0)),
+\qquad
+\rho_{\mathrm{ideal}}(t)=\mathcal{G}_t(\rho_S(0)).
 $$
 
-A caracterização utiliza entropia de von Neumann, pureza, coerência $\ell_1$ na base computacional, fidelidade, distância de traço e descritores de estado/processo, conforme o experimento. **Métricas isoladas não identificam a fonte causal.**
+$$
+N_k(t)=\frac{1}{2}
+\left\|\rho'_{S,k}(t)-\rho_{\mathrm{ideal}}(t)\right\|_1,
+\qquad
+\Delta S_k=S(\rho'_{S,k}(t))-S(\rho_S(0)),
+$$
 
-**Evidências:** [resultados científicos v1](results/final/evidence/FINAL_SCIENTIFIC_RESULTS.md) · [tabela Agente–Ruído–Entropia](results/final/tables/agent_noise_entropy_summary.csv)
+com $S(\rho)=-\operatorname{Tr}(\rho\log_2\rho)$. **$N_k$ é um descritor operacional de ruído proposto para comparação**, não uma definição universal de todo ruído quântico; $\Delta S_k$ também depende da entrada, do tempo e do processo. Quando a evolução ideal não preserva entropia, deve-se comparar a entropia com $S(\rho_{\mathrm{ideal}})$ separadamente.
+
+**Resultado computacional importante:** no controle longitudinal coerente e unitário do corpus v1, o maior $|\Delta S|$ foi $8{,}00856626\times10^{-16}$ (compatível com zero numérico), enquanto a maior distância de traço **ao estado de entrada** alcançou $1$. Esses extremos são obtidos no conjunto de condições amostradas e não precisam corresponder à mesma observação.
+
+$$
+\boxed{\Delta S=0\;\not\Rightarrow\;\text{ausência de perturbação}.}
+$$
+
+Já modelos abertos podem gerar mistura ou relaxação, mas a entropia **não cresce necessariamente** sob toda interação não unitária. Por isso a análise combina entropia, pureza $P(\rho)$, coerência $C_{\ell_1}(\rho)$ na base computacional, fidelidade, distância de traço e, quando disponível, informação sobre o processo.
+
+O resultado da tríade **não é a identificação causal universal**: diferentes agentes podem produzir o mesmo canal reduzido e as mesmas métricas para os estados observados. Seu papel é fornecer uma relação **quantitativa, interpretável e reproduzível** entre modelo de fonte, efeito e resposta informacional.
+
+**Leitura técnica completa:** [Tríade Agente Causal – Ruído – Entropia](docs/TRIADE_AGENTE_CAUSAL_RUIDO_ENTROPIA.md). **Dados:** [resultados científicos v1](results/final/evidence/FINAL_SCIENTIFIC_RESULTS.md) · [tabela Agente–Ruído–Entropia](results/final/tables/agent_noise_entropy_summary.csv) · [limitações](results/final/evidence/FINAL_LIMITATIONS.md).
 
 ### 3.3 Reversibilidade e dinâmica aberta
 
