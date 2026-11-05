@@ -4,13 +4,13 @@
 **Pesquisador:** Daniel Santos Baptista · **Início:** fevereiro de 2026  
 **Escopo:** modelagem física, simulação de um qubit, identificabilidade causal, reversibilidade e quantificação informacional.
 
-[![Testes científicos](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml)
-[![Versão científica](https://img.shields.io/badge/release-ic--2026--final--v2-blue)](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2)
+[![Testes científicos](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/actions/workflows/tests.yml)
+[![Versão científica](https://img.shields.io/badge/release-ic--2026--final--v2-blue)](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2)
 ![Estado](https://img.shields.io/badge/ML%2FQML-n%C3%A3o%20treinado-lightgrey)
 
 > **Questão de pesquisa:** até que ponto fontes ou mecanismos físicos específicos que perturbam um qubit podem ser individualizados matematicamente a partir de suas dinâmicas, parâmetros e observações — e quando diferentes fontes se tornam indistinguíveis no sistema reduzido?
 
-**Comece aqui:** [visão científica](#1-visão-geral-científica) · [resultados](#3-resultados-e-evidências) · [reprodução](#5-instalação-e-reprodução) · [limitações](#7-limitações-e-status-epistemológico) · [release oficial](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2)
+**Comece aqui:** [visão científica](#1-visão-geral-científica) · [resultados](#3-resultados-e-evidências) · [reprodução](#5-instalação-e-reprodução) · [limitações](#7-limitações-e-status-epistemológico) · [release oficial](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2)
 
 ## Resumo executivo
 
@@ -18,7 +18,7 @@ Esta pesquisa investiga uma **caracterização operacional de fontes de perturba
 
 A implementação contém uma biblioteca científica modular, testes automatizados, experimentos controlados de reversibilidade, uma **Transformação Causal Latente** entre operações programadas e dois conjuntos de dados versionados: um **baseline mecanístico v1 com 35.154 registros** e uma **expansão físico-causal v2 com 45.920 registros**, ambos obtidos por simulação. A pesquisa testa identificabilidade **condicional**: há condições distinguíveis e condições de colisão de assinaturas. Nenhuma unicidade universal é pressuposta.
 
-A **versão científica congelada de referência** é [`ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2), no commit [`ca4ee8b`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/commit/ca4ee8b00aea8d450c7219bd9782b732bf966856). Atualizações editoriais posteriores na `main` **não alteram a release congelada**.
+A **versão científica congelada de referência** é [`ic-2026-final-v2`](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2), no commit [`ca4ee8b`](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/commit/ca4ee8b00aea8d450c7219bd9782b732bf966856). Atualizações editoriais posteriores na `main` **não alteram a release congelada**.
 
 ## 1. Visão geral científica
 
@@ -31,18 +31,18 @@ A proposta autoral denomina **Agente Causal** a fonte ou mecanismo específico r
 $$
 \underbrace{A_k}_{\text{fonte/mecanismo}}
 \longrightarrow H_{\mathrm{int}}^{(k)}
-\longrightarrow \mathcal E_k(t)
+\longrightarrow \mathcal{E}_k(t)
 \longrightarrow \rho_k(t)
 \longrightarrow \Sigma_k
 \longrightarrow R_k.
 $$
 
-- **`A_k`:** hipótese de origem/mecanismo físico da perturbação;
-- **`H_{\mathrm{int}}^{(k)}`:** Hamiltoniano ou outro modelo de interação, quando aplicável;
-- **`\mathcal E_k`:** transformação quântica efetiva sobre o sistema;
-- **`\rho_k`:** estado resultante;
-- **`\Sigma_k`:** assinatura baseada em observáveis, dinâmica e métricas;
-- **`R_k`:** diagnóstico da reversibilidade/recuperabilidade **na condição estudada**, não atributo absoluto da fonte.
+- **$A_k$:** hipótese de origem/mecanismo físico da perturbação;
+- **$H_{\mathrm{int}}^{(k)}$:** Hamiltoniano ou outro modelo de interação, quando aplicável;
+- **$\mathcal{E}_k$:** transformação quântica efetiva sobre o sistema;
+- **$\rho_k$:** estado resultante;
+- **$\Sigma_k$:** assinatura baseada em observáveis, dinâmica e métricas;
+- **$R_k$:** diagnóstico da reversibilidade/recuperabilidade **na condição estudada**, não atributo absoluto da fonte.
 
 **Distinção central:** agente ≠ mecanismo de interação ≠ canal efetivo ≠ ruído observado ≠ entropia.
 
@@ -51,10 +51,10 @@ $$
 A implementação também investiga evoluções físicas não programadas entre profundidades de um circuito:
 
 $$
-G_d \;\longrightarrow\; \mathcal C_{k,d} \;\longrightarrow\; G_{d+1}.
+G_d \;\longrightarrow\; \mathcal{C}_{k,d} \;\longrightarrow\; G_{d+1}.
 $$
 
-A `\mathcal C_{k,d}` não é presumida como porta unitária: pode ser identidade, transformação unitária, canal CPTP/Kraus ou outro modelo justificado. A expressão é uma **abstração de modelagem**, não evidência de que toda interação real seja diretamente observável ou separável em intervalos independentes.
+A $\mathcal{C}_{k,d}$ não é presumida como porta unitária: pode ser identidade, transformação unitária, canal CPTP/Kraus ou outro modelo justificado. A expressão é uma **abstração de modelagem**, não evidência de que toda interação real seja diretamente observável ou separável em intervalos independentes.
 
 ### 1.3 Perguntas avaliadas
 
@@ -73,8 +73,8 @@ O código implementa e testa **modelos e protocolos específicos**. Não demonst
 | Fundamentos e controles | Estados de um qubit, dinâmica unitária, Kraus, traço parcial, métricas, reversibilidade e experimento inter-depth | [Mapeamento matemático](docs/MATHEMATICAL_MAPPING.md) · [Experimento inicial](results/first_experiment.csv) |
 | Dataset 001 | Coleta preliminar em escala e verificações de qualidade | [Resultados preliminares](docs/FIRST_SCALED_DATASET_RESULTS.md) |
 | **Baseline mecanístico v1** | **4 famílias**, 14 estados de prova, 81 tempos, **35.154 amostras** | [Resumo v1](results/final/FINAL_SUMMARY.json) · [Evidências](results/final/evidence/) |
-| **Expansão físico-causal v2** | **8 famílias**, 80 pontos paramétricos, 14 estados de prova, 41 tempos, **45.920 amostras** | [Auditoria de mecanismos](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md) · [Release v2](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2) |
-| **Freeze científico** | Tag imutável como referência metodológica da versão consolidada | [`ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2) |
+| **Expansão físico-causal v2** | **8 famílias**, 80 pontos paramétricos, 14 estados de prova, 41 tempos, **45.920 amostras** | [Auditoria de mecanismos](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md) · [Release v2](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2) |
+| **Freeze científico** | Tag imutável como referência metodológica da versão consolidada | [`ic-2026-final-v2`](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2) |
 
 O v1 e o v2 são **experimentos distintos**, não números a serem somados como se fossem um único dataset. O Dataset 001 é histórico/preliminar. A `main` incorpora o desenvolvimento científico dos PRs anteriores; a release preserva o estado oficial usado para rastreabilidade.
 
@@ -92,13 +92,13 @@ O v1 e o v2 são **experimentos distintos**, não números a serem somados como 
 | `external-magnetic-field-wave` | Campo magnético externo, dinâmica Zeeman e ensemble quasistático |
 | `external-electromagnetic-rabi-drive` | Excitação eletromagnética coerente com taxa efetiva de Rabi |
 | `finite-mode-spin-boson-dephasing` | Banho bosônico térmico finito |
-| `thermal-photon-reservoir` | Emissão/absorção em reservatório fotônico a `T=0` e `T>0` |
+| `thermal-photon-reservoir` | Emissão/absorção em reservatório fotônico a $T=0$ e $T>0$ |
 | `mechanical-phonon-mode` | Troca de excitação com modo mecânico/acústico quantizado |
 | `single-mode-mechanical-phonon-dephasing` | Acoplamento vibracional longitudinal e recorrência |
 | `ionizing-radiation-quasiparticle-burst` | Dinâmica pós-impacto de quasipartículas; **ponte de deposição fenomenológica** |
 | `bistable-charge-fluctuator-rtn` | Defeito/flutuador de carga biestável, *random-telegraph noise* |
 
-Essas famílias são modelos físicos declarados em domínios de validade específicos, **não medições de fontes reais**. O antigo modelo de decaimento fotônico a `T=0` do v1 não é contado novamente como identidade causal independente na v2.
+Essas famílias são modelos físicos declarados em domínios de validade específicos, **não medições de fontes reais**. O antigo modelo de decaimento fotônico a $T=0$ do v1 não é contado novamente como identidade causal independente na v2.
 
 ## 3. Resultados e evidências
 
@@ -106,10 +106,10 @@ Essas famílias são modelos físicos declarados em domínios de validade espec�
 
 A análise do v1 compara os seis pares de famílias em estados, tempos e combinações paramétricas. Segundo o protocolo e a tolerância definidos, foram registradas **748 condições de colisão de assinaturas** — o que **não** significa 748 fontes iguais, nem prova não-identificabilidade em todos os protocolos.
 
-Em um controle específico, o modelo de troca finita e o reservatório fotônico Markoviano foram parametrizados para produzir o mesmo canal reduzido de *amplitude damping*, com diferença numérica máxima entre saídas de aproximadamente `2,22 × 10⁻¹⁶`. Na v2, um exemplo análogo compara dephasing por mecanismos diferentes em um instante selecionado.
+Em um controle específico, o modelo de troca finita e o reservatório fotônico Markoviano foram parametrizados para produzir o mesmo canal reduzido de *amplitude damping*, com diferença numérica máxima entre saídas de aproximadamente $2{,}22\times 10^{-16}$. Na v2, um exemplo análogo compara dephasing por mecanismos diferentes em um instante selecionado.
 
 $$
-\mathcal E_{A_i}=\mathcal E_{A_j}
+\mathcal{E}_{A_i}=\mathcal{E}_{A_j}
 \;\not\Rightarrow\;
 A_i=A_j.
 $$
@@ -124,7 +124,7 @@ Isso evidencia uma **limitação de identificabilidade** no nível observado e m
 
 ### 3.2 Agente, ruído e entropia
 
-Uma perturbação pode alterar o estado sem alterar sua entropia. No controle unitário do v1, o maior `|\Delta S|` registrado foi da ordem de `8,01 × 10⁻¹⁶`, embora a distância de traço relativa à entrada alcançasse `1` em condições simuladas.
+Uma perturbação pode alterar o estado sem alterar sua entropia. No controle unitário do v1, o maior $|\Delta S|$ registrado foi da ordem de $8{,}01\times 10^{-16}$, embora a distância de traço relativa à entrada alcançasse `1` em condições simuladas.
 
 $$
 \Delta S=0
@@ -132,21 +132,21 @@ $$
 \text{ausência de perturbação}.
 $$
 
-A caracterização utiliza entropia de von Neumann, pureza, coerência `\ell_1` na base computacional, fidelidade, distância de traço e descritores de estado/processo, conforme o experimento. **Métricas isoladas não identificam a fonte causal.**
+A caracterização utiliza entropia de von Neumann, pureza, coerência $\ell_1$ na base computacional, fidelidade, distância de traço e descritores de estado/processo, conforme o experimento. **Métricas isoladas não identificam a fonte causal.**
 
 **Evidências:** [resultados científicos v1](results/final/evidence/FINAL_SCIENTIFIC_RESULTS.md) · [tabela Agente–Ruído–Entropia](results/final/tables/agent_noise_entropy_summary.csv)
 
 ### 3.3 Reversibilidade e dinâmica aberta
 
 $$
-\mathcal E(\rho)=U\rho U^\dagger
+\mathcal{E}(\rho)=U\rho U^\dagger
 \quad\Longrightarrow\quad
 \mathcal E^{-1}(\rho')=U^\dagger\rho' U
 $$
 
 para uma transformação unitária conhecida. No caso geral, distinguem-se **invertibilidade linear**, **existência de inversa CPTP** e **recuperação condicionada/estruturada**. A evolução global unitária sistema+ambiente não garante uma porta inversa operando apenas sobre o qubit reduzido.
 
-A classificação depende de `(\boldsymbol\theta,t)` e das condições de acesso ao sistema, não é um rótulo invariável do agente.
+A classificação depende de $(\boldsymbol{\theta},t)$ e das condições de acesso ao sistema, não é um rótulo invariável do agente.
 
 **Evidências:** [reversibilidade v1](results/final/evidence/FINAL_REVERSIBILITY_ANALYSIS.md) · [formalismo/código](docs/MATHEMATICAL_MAPPING.md)
 
@@ -183,8 +183,8 @@ Consulte [`docs/MATHEMATICAL_MAPPING.md`](docs/MATHEMATICAL_MAPPING.md) para a c
 **Requisitos:** Python ≥ 3.11, Git e as dependências declaradas no `pyproject.toml`.
 
 ```bash
-git clone https://github.com/DanielBaptista01/IC-Computacao_Cientifica.git
-cd IC-Computacao_Cientifica
+git clone https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal.git
+cd Modelagem-Quantificacao-Agente-Causal
 python -m venv .venv
 ```
 
@@ -218,7 +218,7 @@ A geração incorpora validações matemáticas e registra metadados, configura�
 
 ### Arquivos e versões para citação
 
-- **Código e resultados congelados:** [release `ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2).
+- **Código e resultados congelados:** [release `ic-2026-final-v2`](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases/tag/ic-2026-final-v2).
 - **Metadados e integridade v1:** [manifest](results/final/FINAL_DATASET_MANIFEST.json) · [resumo](results/final/FINAL_SUMMARY.json).
 - **Pacotes oficiais v1 e v2:** anexados à release consolidada.
 - **Evidências para o relatório científico:** [`results/final/evidence/`](results/final/evidence/).
@@ -232,9 +232,9 @@ Os conjuntos exportados separam `scientific_records`, `observable_features` e `c
 
 ## 6. Estado de validação e publicação
 
-A [execução da `main` de 8 de outubro de 2026](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/runs/37844331504), vinculada ao commit da release, concluiu com sucesso testes, geração e publicação dos dois pacotes científicos.
+A [execução da `main` de 8 de outubro de 2026](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/actions/runs/37844331504), vinculada ao commit da release, concluiu com sucesso testes, geração e publicação dos dois pacotes científicos.
 
-A documentação de prontidão registra **104 testes** no estado pré-freeze; para verificar o estado corrente, use `pytest` e o workflow [`scientific-tests`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml). A execução bem-sucedida do CI sustenta **reprodutibilidade computacional naquele ambiente**, não validação independente em hardware ou generalização física irrestrita.
+A documentação de prontidão registra **104 testes** no estado pré-freeze; para verificar o estado corrente, use `pytest` e o workflow [`scientific-tests`](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/actions/workflows/tests.yml). A execução bem-sucedida do CI sustenta **reprodutibilidade computacional naquele ambiente**, não validação independente em hardware ou generalização física irrestrita.
 
 **A tag congelada permanece fixa:** commits de manutenção ou apresentação na `main` não redefinem retroativamente o estado científico da release.
 
@@ -248,7 +248,7 @@ A documentação de prontidão registra **104 testes** no estado pré-freeze; pa
 | **Não demonstrado** | Identidade física única a partir do canal reduzido, superioridade universal de estratégias adaptativas, inferência causal de todo ruído real |
 | **Trabalho futuro** | Comparação com medições de hardware, novos modelos físicos e avaliação de aprendizado clássico, híbrido ou QML |
 
-Limitações explícitas do corpus: estudo predominantemente de **um qubit**, grades paramétricas teóricas, ausência de hardware/shots/erros de leitura, aproximações físicas e fenomenológicas documentadas, coerência `\ell_1` dependente da base e identificabilidade dependente do protocolo. Alguns fenômenos macroscópicos, acoplamentos espaciais multiqubit e calibrações dependentes de plataforma permanecem fora de escopo.
+Limitações explícitas do corpus: estudo predominantemente de **um qubit**, grades paramétricas teóricas, ausência de hardware/shots/erros de leitura, aproximações físicas e fenomenológicas documentadas, coerência $\ell_1$ dependente da base e identificabilidade dependente do protocolo. Alguns fenômenos macroscópicos, acoplamentos espaciais multiqubit e calibrações dependentes de plataforma permanecem fora de escopo.
 
 **Nenhum modelo de Machine Learning ou Quantum Machine Learning foi treinado nesta IC.** A Utunnel pertence à trajetória exploratória anterior e **não** é resultado final comprovado desta linha. Para os limites de cada mecanismo, consulte [auditoria físico-causal](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md) e [limitações científicas v1](results/final/evidence/FINAL_LIMITATIONS.md).
 
@@ -265,7 +265,7 @@ Limitações explícitas do corpus: estudo predominantemente de **um qubit**, gr
 
 **Documentação científica do projeto:** [formalismo](docs/MATHEMATICAL_MAPPING.md) · [protocolo de coleta](docs/CAUSAL_AGENT_COLLECTION_PROTOCOL.md) · [auditoria final](docs/FINAL_CODE_SCIENTIFIC_AUDIT.md) · [auditoria físico-causal](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md).
 
-**Histórico reprodutível:** [Pull Requests](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/pulls?q=is%3Apr) · [GitHub Actions](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions) · [Releases](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases).
+**Histórico reprodutível:** [Pull Requests](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/pulls?q=is%3Apr) · [GitHub Actions](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/actions) · [Releases](https://github.com/DanielBaptista01/Modelagem-Quantificacao-Agente-Causal/releases).
 
 ---
 
