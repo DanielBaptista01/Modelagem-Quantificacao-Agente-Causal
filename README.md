@@ -14,7 +14,7 @@
 
 A IC investiga **como uma fonte física específica produz uma interação, como essa interação se manifesta como ruído em relação à computação pretendida e como o estado resultante pode ser caracterizado informacionalmente**. A tríade organiza três conceitos distintos — **origem, efeito dinâmico e medida do estado** — sem tratá-los como equivalentes.
 
-$
+$$
 \underbrace{A_k}_{\text{Agente Causal}}
 \xrightarrow{\;\text{interação física}\;}
 \underbrace{\mathcal{E}_{k,t}}_{\text{dinâmica}}
@@ -22,7 +22,7 @@ $
 \underbrace{\rho'_{S,k}(t)}_{\text{estado resultante}}
 \xrightarrow{\;\text{comparação e métricas}\;}
 \underbrace{\left\{N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots\right\}}_{\text{assinatura observável}}.
-$
+$$
 
 Aqui, o **ruído** é caracterizado operacionalmente pelo desvio em relação à evolução ideal, enquanto a **entropia** é apenas uma das métricas da resposta do estado. **Uma perturbação pode existir com $\Delta S=0$**; aumento de entropia não é consequência universal de todo ruído. A caracterização conjunta é um objetivo científico da IC, **não uma prova automática da identidade do agente**.
 
