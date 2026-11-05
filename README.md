@@ -151,7 +151,7 @@ A tríade é **um dos objetivos explícitos da IC**: conectar a *origem física 
 | Dimensão | Pergunta científica | Representação |
 | --- | --- | --- |
 | **Agente Causal** | Qual mecanismo/fonte foi modelado como responsável pela interação? | $A_k$ e seus parâmetros físicos |
-| **Ruído observado** | Como a dinâmica real se afasta da evolução ideal para um estado de prova e um tempo definidos? | $\mathcal{E}_{k,t}$, $\rho'_{S,k}$ e distância ao alvo |
+| **Ruído observado** | Como a dinâmica real se afasta da evolução ideal para um estado de prova e um tempo definidos? | Canal quântico efetivo, estado resultante e distância de traço ao alvo |
 | **Entropia** | Como mudou o espectro e o grau de mistura do estado? | $S(\rho)$, $\Delta S_k$ e métricas complementares |
 
 A interação é representada por um Hamiltoniano, canal ou dilatação sistema–ambiente apropriados ao regime. Tomando a evolução computacional de referência $\mathcal{G}_t$, a comparação operacional pode ser escrita como:
