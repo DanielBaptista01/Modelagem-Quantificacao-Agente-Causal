@@ -1,320 +1,272 @@
-# IC — Modelagem e Quantificação do Agente Causal
+# IC 2026 — Modelagem e Quantificação do Agente Causal
 
-Repositório computacional da Iniciação Científica de 2026 sobre modelagem e
-quantificação de Agentes Causais em sistemas quânticos.
+**Iniciação Científica em Computação Quântica e Sistemas Quânticos Abertos**  
+**Pesquisador:** Daniel Santos Baptista · **Início:** fevereiro de 2026  
+**Escopo:** modelagem física, simulação de um qubit, identificabilidade causal, reversibilidade e quantificação informacional.
 
-A formulação final preserva a teoria usual de sistemas abertos:
+[![Testes científicos](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml)
+[![Versão científica](https://img.shields.io/badge/release-ic--2026--final--v2-blue)](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2)
+![Estado](https://img.shields.io/badge/ML%2FQML-n%C3%A3o%20treinado-lightgrey)
 
-$$
-\text{Ambiente} \supset \{A_1,A_2,\ldots,A_N\},
-$$
+> **Questão de pesquisa:** até que ponto fontes ou mecanismos físicos específicos que perturbam um qubit podem ser individualizados matematicamente a partir de suas dinâmicas, parâmetros e observações — e quando diferentes fontes se tornam indistinguíveis no sistema reduzido?
 
-e investiga se fontes ou mecanismos específicos presentes nessa descrição
-agregada podem ser modelados individualmente pela cadeia
+**Comece aqui:** [visão científica](#1-visão-geral-científica) · [resultados](#3-resultados-e-evidências) · [reprodução](#5-instalação-e-reprodução) · [limitações](#7-limitações-e-status-epistemológico) · [release oficial](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2)
 
-$$
-\text{Fonte física}
-\rightarrow A_k
-\rightarrow H_{\mathrm{int}}^{(k)}
-\rightarrow \mathcal E_k(t)
-\rightarrow \rho_k(t)
-\rightarrow \Sigma_k
-\rightarrow R_k.
-$$
+## Resumo executivo
 
-O projeto não afirma unicidade universal da assinatura causal e não implementa
-Machine Learning ou Quantum Machine Learning.
+Esta pesquisa investiga uma **caracterização operacional de fontes de perturbação quântica**, denominadas *Agentes Causais* na formulação autoral da IC. O ambiente **não é eliminado** da teoria: sua descrição em sistemas quânticos abertos é preservada, enquanto a pesquisa procura decompor mecanismos físicos identificáveis e associá-los a modelos de interação, transformações reduzidas, parâmetros e assinaturas observáveis.
 
-## Versão científica final
+A implementação contém uma biblioteca científica modular, testes automatizados, experimentos controlados de reversibilidade, uma **Transformação Causal Latente** entre operações programadas e dois conjuntos de dados versionados: um **baseline mecanístico v1 com 35.154 registros** e uma **expansão físico-causal v2 com 45.920 registros**, ambos obtidos por simulação. A pesquisa testa identificabilidade **condicional**: há condições distinguíveis e condições de colisão de assinaturas. Nenhuma unicidade universal é pressuposta.
 
-Identificador do dataset: `ic_causal_agents_final_v1`
+A **versão científica congelada de referência** é [`ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2), no commit [`ca4ee8b`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/commit/ca4ee8b00aea8d450c7219bd9782b732bf966856). Atualizações editoriais posteriores na `main` **não alteram a release congelada**.
 
-Configuração: `experiments/configs/ic_causal_agents_final_v1.json`
+## 1. Visão geral científica
 
-Comando de geração: `ic-finalize`
+### 1.1 Problema e hipótese autoral
 
-O Dataset 001 permanece preservado como experimento preliminar e não é o
-dataset final.
+Na descrição de sistemas quânticos abertos, a evolução conjunta sistema–ambiente pode ser unitária, embora a dinâmica do sistema reduzido não seja. Um canal quântico efetivo descreve o que ocorreu ao qubit, mas **não identifica necessariamente a fonte física** que o produziu.
 
-O catálogo final contém quatro famílias:
-
-1. coherent-longitudinal-detuning — perturbação longitudinal coerente e unitária;
-2. finite-two-level-exchange-relaxation — grau de liberdade quântico finito com
-   troca de excitação e relaxação reduzida;
-3. finite-mode-spin-boson-dephasing — qubit longitudinalmente acoplado a banho
-   bosônico térmico finito;
-4. markovian-photon-reservoir-decay — relaxação radiativa Markoviana em
-   reservatório fotônico.
-
-Nomes de canais, como `dephasing` e `amplitude_damping`, são descrições de dinâmica
-efetiva e não identidades causais.
-
-## Dataset final
-
-A configuração utiliza 4 famílias, 14 estados de prova, 81 pontos temporais,
-5 pontos paramétricos para o agente coerente, 5 para a troca finita, 5 para o
-reservatório fotônico e 16 para o spin-boson finito.
-
-A geração produz 35.154 amostras válidas. Qualquer amostra que falhe no gate
-matemático aborta a geração; não há descarte silencioso.
-
-Estrutura:
-
-    results/final/
-    ├── dataset/
-    │   ├── scientific_records.csv
-    │   ├── scientific_records.parquet
-    │   ├── observable_features.csv
-    │   ├── observable_features.parquet
-    │   ├── causal_labels.csv
-    │   ├── causal_labels.parquet
-    │   ├── metadata.json
-    │   └── provenance.json
-    ├── tables/
-    ├── figures/
-    ├── evidence/
-    ├── environment/
-    ├── config/
-    ├── FINAL_DATASET_MANIFEST.json
-    └── FINAL_SUMMARY.json
-
-`observable_features` exclui IDs causais, nomes de fonte/canal e parâmetros
-específicos do simulador capazes de revelar diretamente o rótulo. O registro
-científico completo preserva parâmetros, proveniência e a matriz densidade
-exata como ground truth de simulação.
-
-## Instalação reproduzível
-
-    git clone https://github.com/DanielBaptista01/IC-Computacao_Cientifica.git
-    cd IC-Computacao_Cientifica
-    python -m venv .venv
-
-Ative o ambiente virtual e execute:
-
-    python -m pip install --upgrade pip
-    python -m pip install -r requirements-lock.txt
-    python -m pip install -e . --no-deps
-
-## Validação
-
-    pytest
-
-A suíte cobre estados densidade, Hermiticidade, unitariedade, Kraus, dinâmica
-global/reduzida, reversibilidade, Choi/superoperadores, Transformação Causal
-Latente, corpus/proveniência, quatro modelos finais, exportação e
-identificabilidade.
-
-## Reprodução integral
-
-    ic-finalize --config experiments/configs/ic_causal_agents_final_v1.json --output-dir results/final
-
-O pipeline gera dataset, tabelas, figuras, análise de identificabilidade,
-reversibilidade, tríade Agente–Ruído–Entropia, metadata, proveniência, captura
-do ambiente e hashes SHA-256.
-
-O experimento inter-depth permanece reproduzível:
-
-    ic-interdepth-experiment --output-dir results/interdepth
-
-## Identificabilidade
-
-A análise testa
+A proposta autoral denomina **Agente Causal** a fonte ou mecanismo específico responsável por uma interação. Seu objetivo não é renomear canais como fontes, mas estabelecer uma trilha rastreável:
 
 $$
-A_i\neq A_j \quad\Longrightarrow?\quad \Sigma_i\neq\Sigma_j.
+\underbrace{A_k}_{\text{fonte/mecanismo}}
+\longrightarrow H_{\mathrm{int}}^{(k)}
+\longrightarrow \mathcal E_k(t)
+\longrightarrow \rho_k(t)
+\longrightarrow \Sigma_k
+\longrightarrow R_k.
 $$
 
-Todos os seis pares entre as quatro famílias são avaliados por estado, tempo e
-combinações paramétricas. Regiões de colisão são preservadas como
-não-identificabilidade.
+- **`A_k`:** hipótese de origem/mecanismo físico da perturbação;
+- **`H_{\mathrm{int}}^{(k)}`:** Hamiltoniano ou outro modelo de interação, quando aplicável;
+- **`\mathcal E_k`:** transformação quântica efetiva sobre o sistema;
+- **`\rho_k`:** estado resultante;
+- **`\Sigma_k`:** assinatura baseada em observáveis, dinâmica e métricas;
+- **`R_k`:** diagnóstico da reversibilidade/recuperabilidade **na condição estudada**, não atributo absoluto da fonte.
 
-Há ainda um experimento controlado em que a troca finita e o reservatório
-fotônico Markoviano são parametrizados para gerar o mesmo canal reduzido de
-amplitude damping. Portanto,
+**Distinção central:** agente ≠ mecanismo de interação ≠ canal efetivo ≠ ruído observado ≠ entropia.
+
+### 1.2 Transformação Causal Latente
+
+A implementação também investiga evoluções físicas não programadas entre profundidades de um circuito:
 
 $$
-\text{identidade do canal reduzido}
-\not\Rightarrow
-\text{identidade da fonte física}.
+G_d \;\longrightarrow\; \mathcal C_{k,d} \;\longrightarrow\; G_{d+1}.
 $$
 
-## Agente Causal, ruído e entropia
+A `\mathcal C_{k,d}` não é presumida como porta unitária: pode ser identidade, transformação unitária, canal CPTP/Kraus ou outro modelo justificado. A expressão é uma **abstração de modelagem**, não evidência de que toda interação real seja diretamente observável ou separável em intervalos independentes.
 
-A implementação mantém a distinção:
+### 1.3 Perguntas avaliadas
 
-    Agente Causal = fonte/mecanismo modelado
-    Ruído = efeito da interação em relação à computação/estado pretendido
-    Entropia = grandeza informacional do estado
+1. Fontes fisicamente distintas podem produzir o **mesmo canal reduzido**?
+2. Que combinações de estados de prova, tempos e parâmetros tornam duas interações distinguíveis?
+3. Uma alteração de fidelidade implica decoerência? **Não necessariamente.**
+4. Quando existe inversão unitária, inversa apenas linear ou impossibilidade de inversa CPTP universal?
+5. Que informação operacional poderá, futuramente, sustentar estratégias adaptativas de mitigação ou recuperação?
 
-O controle coerente fornece perturbações observáveis com entropia preservada:
+O código implementa e testa **modelos e protocolos específicos**. Não demonstra que toda fonte física real seja unicamente identificável.
+
+## 2. Linha de desenvolvimento e conjuntos de dados
+
+| Marco | Escopo | Registro de referência |
+| --- | --- | --- |
+| Fundamentos e controles | Estados de um qubit, dinâmica unitária, Kraus, traço parcial, métricas, reversibilidade e experimento inter-depth | [Mapeamento matemático](docs/MATHEMATICAL_MAPPING.md) · [Experimento inicial](results/first_experiment.csv) |
+| Dataset 001 | Coleta preliminar em escala e verificações de qualidade | [Resultados preliminares](docs/FIRST_SCALED_DATASET_RESULTS.md) |
+| **Baseline mecanístico v1** | **4 famílias**, 14 estados de prova, 81 tempos, **35.154 amostras** | [Resumo v1](results/final/FINAL_SUMMARY.json) · [Evidências](results/final/evidence/) |
+| **Expansão físico-causal v2** | **8 famílias**, 80 pontos paramétricos, 14 estados de prova, 41 tempos, **45.920 amostras** | [Auditoria de mecanismos](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md) · [Release v2](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2) |
+| **Freeze científico** | Tag imutável como referência metodológica da versão consolidada | [`ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2) |
+
+O v1 e o v2 são **experimentos distintos**, não números a serem somados como se fossem um único dataset. O Dataset 001 é histórico/preliminar. A `main` incorpora o desenvolvimento científico dos PRs anteriores; a release preserva o estado oficial usado para rastreabilidade.
+
+### 2.1 Famílias do baseline v1
+
+1. `coherent-longitudinal-detuning` — perturbação longitudinal unitária;
+2. `finite-two-level-exchange-relaxation` — troca de excitação com grau de liberdade finito;
+3. `finite-mode-spin-boson-dephasing` — banho bosônico térmico finito;
+4. `markovian-photon-reservoir-decay` — reservatório fotônico Markoviano de temperatura nula.
+
+### 2.2 Famílias da expansão físico-causal v2
+
+| Família implementada | Mecanismo modelado |
+| --- | --- |
+| `external-magnetic-field-wave` | Campo magnético externo, dinâmica Zeeman e ensemble quasistático |
+| `external-electromagnetic-rabi-drive` | Excitação eletromagnética coerente com taxa efetiva de Rabi |
+| `finite-mode-spin-boson-dephasing` | Banho bosônico térmico finito |
+| `thermal-photon-reservoir` | Emissão/absorção em reservatório fotônico a `T=0` e `T>0` |
+| `mechanical-phonon-mode` | Troca de excitação com modo mecânico/acústico quantizado |
+| `single-mode-mechanical-phonon-dephasing` | Acoplamento vibracional longitudinal e recorrência |
+| `ionizing-radiation-quasiparticle-burst` | Dinâmica pós-impacto de quasipartículas; **ponte de deposição fenomenológica** |
+| `bistable-charge-fluctuator-rtn` | Defeito/flutuador de carga biestável, *random-telegraph noise* |
+
+Essas famílias são modelos físicos declarados em domínios de validade específicos, **não medições de fontes reais**. O antigo modelo de decaimento fotônico a `T=0` do v1 não é contado novamente como identidade causal independente na v2.
+
+## 3. Resultados e evidências
+
+### 3.1 Identificabilidade condicional
+
+A análise do v1 compara os seis pares de famílias em estados, tempos e combinações paramétricas. Segundo o protocolo e a tolerância definidos, foram registradas **748 condições de colisão de assinaturas** — o que **não** significa 748 fontes iguais, nem prova não-identificabilidade em todos os protocolos.
+
+Em um controle específico, o modelo de troca finita e o reservatório fotônico Markoviano foram parametrizados para produzir o mesmo canal reduzido de *amplitude damping*, com diferença numérica máxima entre saídas de aproximadamente `2,22 × 10⁻¹⁶`. Na v2, um exemplo análogo compara dephasing por mecanismos diferentes em um instante selecionado.
+
+$$
+\mathcal E_{A_i}=\mathcal E_{A_j}
+\;\not\Rightarrow\;
+A_i=A_j.
+$$
+
+Isso evidencia uma **limitação de identificabilidade** no nível observado e motiva o uso de informação temporal e múltiplos estados de prova. A v2 avalia os **28 pares** possíveis entre suas oito famílias e uma assinatura operacional de processo obtida com quatro estados linearmente independentes. A distância operacional RMS usada **não é distância diamond**.
+
+**Evidências:** [análise de identificabilidade v1](results/final/evidence/FINAL_IDENTIFIABILITY_ANALYSIS.md) · [auditoria v2](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md)
+
+![Matriz de frações de colisão sob o protocolo do v1](results/final/figures/identifiability_collision_fraction_matrix.png)
+
+*Frações de condições com assinaturas próximas segundo o critério numérico do v1. A figura depende do conjunto de estados, tempos, parâmetros e tolerâncias selecionados.*
+
+### 3.2 Agente, ruído e entropia
+
+Uma perturbação pode alterar o estado sem alterar sua entropia. No controle unitário do v1, o maior `|\Delta S|` registrado foi da ordem de `8,01 × 10⁻¹⁶`, embora a distância de traço relativa à entrada alcançasse `1` em condições simuladas.
 
 $$
 \Delta S=0
-\not\Rightarrow
+\;\not\Rightarrow\;
 \text{ausência de perturbação}.
 $$
 
-São analisadas entropia, pureza, coerência $\ell_1$, fidelidade, distância de traço,
-vetor de Bloch, espectro e descritores de Choi/superoperador.
+A caracterização utiliza entropia de von Neumann, pureza, coerência `\ell_1` na base computacional, fidelidade, distância de traço e descritores de estado/processo, conforme o experimento. **Métricas isoladas não identificam a fonte causal.**
 
-## Reversibilidade
+**Evidências:** [resultados científicos v1](results/final/evidence/FINAL_SCIENTIFIC_RESULTS.md) · [tabela Agente–Ruído–Entropia](results/final/tables/agent_noise_entropy_summary.csv)
 
-A classificação é feita por condição dinâmica $(\boldsymbol{\theta},t)$, não como rótulo
-permanente da família. São distinguidas reversão unitária direta,
-invertibilidade linear, inversa CPTP, não-invertibilidade reduzida e necessidade
-de recuperação/mitigação estruturada.
-
-No spin-boson finito, $q(t)=e^{-\Lambda(t)}$ é analiticamente positivo para
-$\Lambda(t)$ finito. Quando $q(t)$ fica abaixo da tolerância do teste numérico de posto, o
-dataset registra separadamente a invertibilidade analítica e a singularidade
-numérica efetiva.
-
-## Transformação Causal Latente
-
-A transformação física não programada continua representada por
+### 3.3 Reversibilidade e dinâmica aberta
 
 $$
-G_d \rightarrow \mathcal C_{k,d} \rightarrow G_{d+1}.
+\mathcal E(\rho)=U\rho U^\dagger
+\quad\Longrightarrow\quad
+\mathcal E^{-1}(\rho')=U^\dagger\rho' U
 $$
 
-Ela pode ser identidade, unitária, CPTP por Kraus ou extensão estruturada; não
-é assumida como porta unitária em geral.
+para uma transformação unitária conhecida. No caso geral, distinguem-se **invertibilidade linear**, **existência de inversa CPTP** e **recuperação condicionada/estruturada**. A evolução global unitária sistema+ambiente não garante uma porta inversa operando apenas sobre o qubit reduzido.
 
-## Evidências para o Relatório Final
+A classificação depende de `(\boldsymbol\theta,t)` e das condições de acesso ao sistema, não é um rótulo invariável do agente.
 
-Usar como fontes primárias:
+**Evidências:** [reversibilidade v1](results/final/evidence/FINAL_REVERSIBILITY_ANALYSIS.md) · [formalismo/código](docs/MATHEMATICAL_MAPPING.md)
 
-    results/final/evidence/FINAL_DATASET_MANIFEST.md
-    results/final/evidence/FINAL_SCIENTIFIC_RESULTS.md
-    results/final/evidence/FINAL_SCIENTIFIC_VALIDATION.md
-    results/final/evidence/FINAL_IDENTIFIABILITY_ANALYSIS.md
-    results/final/evidence/FINAL_REVERSIBILITY_ANALYSIS.md
-    results/final/evidence/FINAL_REPRODUCIBILITY.md
-    results/final/evidence/FINAL_LIMITATIONS.md
-    results/final/FINAL_DATASET_MANIFEST.json
-    results/final/FINAL_SUMMARY.json
+![Distribuição de classificações de reversibilidade no corpus v1](results/final/figures/reversibility_distribution.png)
 
-Os números do Relatório Final devem ser extraídos desses arquivos e tabelas,
-não recalculados manualmente.
+*Distribuição no protocolo e nas condições amostradas do baseline v1; não representa todas as interações possíveis de cada família física.*
 
-## Limitações
+## 4. Organização do repositório
 
-A versão final é uma investigação computacional de um qubit e quatro famílias.
-Não há hardware real, shots, erro de leitura ou tomografia experimental. Os
-intervalos paramétricos são grades teóricas normalizadas, não calibrações de
-hardware. A coerência $\ell_1$ depende da base. A identificabilidade é condicional ao
-protocolo. Nenhum ML/QML foi treinado.
+```text
+src/ic_quantum/
+├── core/          estados, operadores e validação
+├── agents/        representações e modelos de Agentes Causais
+├── channels/      operações unitárias e canais de Kraus
+├── dynamics/      evolução, traço parcial e transformação latente
+├── metrics/       entropia, pureza, fidelidade e coerência
+├── analysis/      identificabilidade e reversibilidade
+├── experiments/   execução dos protocolos e pipelines
+└── data/          schemas, registros e exportação
 
-A Utunnel e o potencial estocástico pertencem à trajetória histórica da IC e
-não são apresentados como resultados finais demonstrados.
+experiments/configs/   configurações dos experimentos
+tests/                 testes científicos automatizados
+docs/                  fundamentação, protocolos e auditorias
+results/final/         dataset v1, figuras, tabelas e evidências
+.github/workflows/     validação e publicação de releases
+```
 
-## Princípio científico
+O formalismo é implementado explicitamente com álgebra matricial NumPy/SciPy; não depende exclusivamente de uma API de circuitos. O código inclui verificações de Hermiticidade, estados densidade, unitariedade, completude de Kraus, propriedades CPTP, limites analíticos e equivalência sistema global/reduzido.
 
-    problema científico
-    -> hipótese
-    -> modelo matemático
-    -> implementação
-    -> validação
-    -> experimento
-    -> dados
-    -> análise
+Consulte [`docs/MATHEMATICAL_MAPPING.md`](docs/MATHEMATICAL_MAPPING.md) para a correspondência formalismo → implementação.
 
-Consulte docs/MATHEMATICAL_MAPPING.md e results/final/evidence/.
+## 5. Instalação e reprodução
 
+**Requisitos:** Python ≥ 3.11, Git e as dependências declaradas no `pyproject.toml`.
 
+```bash
+git clone https://github.com/DanielBaptista01/IC-Computacao_Cientifica.git
+cd IC-Computacao_Cientifica
+python -m venv .venv
+```
 
-## Expansão físico-causal v2
+Ative o ambiente virtual:
 
-A tag `ic-2026-final` e o dataset `ic_causal_agents_final_v1` permanecem
-congelados como baseline mecanístico. A expansão físico-causal usa:
+- Linux/macOS: `source .venv/bin/activate`
+- Windows PowerShell: `.venv\Scripts\Activate.ps1`
 
-    ic_causal_agents_physical_v2
+Para reproduzir o conjunto fixado de dependências, conforme `requirements-lock.txt`:
 
-O catálogo reconciliado contém oito famílias/mecanismos causalmente distintos:
+```bash
+python -m pip install -r requirements-lock.txt
+python -m pip install -e . --no-deps
+pytest
+```
 
-1. `external-magnetic-field-wave` — campo magnético externo: evolução Zeeman
-   coerente e ensemble longitudinal quasistático;
-2. `external-electromagnetic-rabi-drive` — onda EM coerente próxima à
-   ressonância, com acoplamento efetivo de Rabi;
-3. `finite-mode-spin-boson-dephasing` — banho bosônico térmico finito;
-4. `thermal-photon-reservoir` — reservatório fotônico Markoviano cobrindo
-   ($T=0$) e temperatura finita, com emissão e absorção;
-5. `mechanical-phonon-mode` — modo acústico/mecânico quantizado com troca de
-   excitação;
-6. `single-mode-mechanical-phonon-dephasing` — modo vibracional quantizado com
-   acoplamento longitudinal e dephasing recorrente;
-7. `ionizing-radiation-quasiparticle-burst` — evento ionizante condicionado à
-   dinâmica pós-impacto de quasipartículas;
-8. `bistable-charge-fluctuator-rtn` — armadilha/defeito de carga biestável
-   modelado por random-telegraph noise.
+**Reproduzir os experimentos e conjuntos de dados:**
 
-Essas famílias não são oito nomes de canais: cada entrada representa uma fonte/mecanismo físico documentado, não um rótulo de canal. O catálogo separa
-`physical_source`, `causal_mechanism`, parâmetros físicos, dinâmica efetiva,
-assinatura e reversibilidade. O modelo de radiação é explicitamente
-`PHENOMENOLOGICAL` na ponte entre energia/geometria depositada e a condição
-inicial de quasipartículas.
+```bash
+# Transformação Causal Latente em circuito mínimo
+ic-interdepth-experiment --output-dir results/interdepth
 
-O drive EM coerente usa a taxa efetiva de Rabi $\Omega$. O projeto não inventa
-uma conversão universal de $E_0$, polarização e momento de dipolo para
-$\Omega$ sem uma plataforma física específica.
+# Baseline mecanístico v1
+ic-finalize --config experiments/configs/ic_causal_agents_final_v1.json --output-dir results/final
 
-### Análises v2
+# Expansão físico-causal v2
+ic-physical-v2 --config experiments/configs/ic_causal_agents_physical_v2.json --output-dir results/physical_v2
+```
 
-O pipeline gera:
-- assinaturas de estado por $\langle X\rangle$, $\langle Y\rangle$ e $\langle Z\rangle$, além de métricas informacionais;
-- identificabilidade pairwise das variedades parâmetro-tempo;
-- uma assinatura operacional de processo construída com quatro probes
-  linearmente independentes $|0\rangle$, $|1\rangle$, $|+\rangle$ e $|+i\rangle$;
-- um experimento controlado em que duas fontes físicas diferentes são
-  parametrizadas para o mesmo canal reduzido de `dephasing` em um snapshot;
-- reversibilidade por condição física;
-- $T_1^*/T_2^*$ como primeiros cruzamentos de $1/e$, sem impor ajuste exponencial a
-  dinâmicas recorrentes;
-- comparação de mecanismos de dephasing;
-- comparação de duas linhas espectrais mecânicas com mesma razão $g/\omega$ e mesma
-  ocupação térmica.
+A geração incorpora validações matemáticas e registra metadados, configurações, proveniência e hashes dos arquivos produzidos. **A execução em hardware real não faz parte deste corpus.**
 
-A distância de processo usada no v2 é uma métrica operacional RMS baseada nas
-saídas dos quatro probes, e **não** é apresentada como distância diamond.
+### Arquivos e versões para citação
 
-### Reprodutibilidade
+- **Código e resultados congelados:** [release `ic-2026-final-v2`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases/tag/ic-2026-final-v2).
+- **Metadados e integridade v1:** [manifest](results/final/FINAL_DATASET_MANIFEST.json) · [resumo](results/final/FINAL_SUMMARY.json).
+- **Pacotes oficiais v1 e v2:** anexados à release consolidada.
+- **Evidências para o relatório científico:** [`results/final/evidence/`](results/final/evidence/).
+- **Critério de congelamento científico:** [`docs/PHYSICAL_V2_READINESS.md`](docs/PHYSICAL_V2_READINESS.md).
 
-Comando:
+O diretório `results/physical_v2/` é produzido pelo comando `ic-physical-v2` e disponibilizado no pacote da **release**, não necessariamente como pasta versionada na `main`. Não se deve inferir ausência de resultados v2 pela ausência dessa pasta na árvore de arquivos.
 
-    ic-physical-v2 --config experiments/configs/ic_causal_agents_physical_v2.json --output-dir results/physical_v2
+### Integridade dos dados e futuro aprendizado
 
-A saída separa `scientific_records`, `observable_features`,
-`causal_labels`, metadata e provenance. O conjunto `observable_features`
-não inclui `agent_model_id`, `physical_source`, `causal_mechanism`, regime
-físico nem parâmetros específicos do simulador.
+Os conjuntos exportados separam `scientific_records`, `observable_features` e `causal_labels`. O registro completo contém o estado exato e os parâmetros da simulação (*ground truth*); o conjunto de características observáveis exclui identificadores e parâmetros que revelariam diretamente a classe causal. Essa separação **prepara** estudos futuros, mas não valida, por si só, identificabilidade, generalização ou desempenho de aprendizado.
 
-### Limites não preenchidos artificialmente
+## 6. Estado de validação e publicação
 
-Continuam fora do corpus validado:
-- transporte microscópico completo de partículas ionizantes e a conversão
-  universal de energia/localização depositada em $x_{\mathrm{qp}}(0)$;
-- vibração macroscópica arbitrária de encapsulamento/chassi;
-- ensemble completo de defeitos para reproduzir genericamente um espectro 1/f;
-- calibração universal de campo elétrico bruto para uma taxa de Rabi;
-- propagação espacial correlacionada em muitos qubits;
-- validação experimental em hardware.
+A [execução da `main` de 8 de outubro de 2026](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/runs/37844331504), vinculada ao commit da release, concluiu com sucesso testes, geração e publicação dos dois pacotes científicos.
 
-Esses pontos são limitações ou trabalhos futuros, não classes inventadas para
-aumentar o dataset. Nenhum ML/QML é treinado nesta IC.
+A documentação de prontidão registra **104 testes** no estado pré-freeze; para verificar o estado corrente, use `pytest` e o workflow [`scientific-tests`](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions/workflows/tests.yml). A execução bem-sucedida do CI sustenta **reprodutibilidade computacional naquele ambiente**, não validação independente em hardware ou generalização física irrestrita.
 
+**A tag congelada permanece fixa:** commits de manutenção ou apresentação na `main` não redefinem retroativamente o estado científico da release.
 
-O modelo `markovian-photon-reservoir-decay` continua preservado no v1, mas
-não é duplicado como rótulo causal no v2: ele é o limite $T=0$ da família
-`thermal-photon-reservoir`.
+## 7. Limitações e status epistemológico
 
+| Categoria | O que o projeto sustenta |
+| --- | --- |
+| **Literatura estabelecida** | Formalismo sistema–ambiente, operações quânticas, traço parcial, canais CPTP/Kraus, métricas informacionais |
+| **Proposta autoral** | Enquadramento de fontes específicas como *Agentes Causais* e Transformações Causais Latentes entre profundidades |
+| **Validado por simulação** | Implementações dos modelos no domínio declarado, experimentos controlados, métricas, colisões de assinatura e classificação operacional de reversibilidade |
+| **Não demonstrado** | Identidade física única a partir do canal reduzido, superioridade universal de estratégias adaptativas, inferência causal de todo ruído real |
+| **Trabalho futuro** | Comparação com medições de hardware, novos modelos físicos e avaliação de aprendizado clássico, híbrido ou QML |
 
-## Versão final consolidada
+Limitações explícitas do corpus: estudo predominantemente de **um qubit**, grades paramétricas teóricas, ausência de hardware/shots/erros de leitura, aproximações físicas e fenomenológicas documentadas, coerência `\ell_1` dependente da base e identificabilidade dependente do protocolo. Alguns fenômenos macroscópicos, acoplamentos espaciais multiqubit e calibrações dependentes de plataforma permanecem fora de escopo.
 
-O encerramento computacional oficial da IC é identificado pela tag
-`ic-2026-final-v2`. Essa tag é criada automaticamente apenas após um workflow
-completo e bem-sucedido na `main`, e preserva os dois pacotes científicos:
-`ic_causal_agents_final_v1` e `ic_causal_agents_physical_v2`.
+**Nenhum modelo de Machine Learning ou Quantum Machine Learning foi treinado nesta IC.** A Utunnel pertence à trajetória exploratória anterior e **não** é resultado final comprovado desta linha. Para os limites de cada mecanismo, consulte [auditoria físico-causal](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md) e [limitações científicas v1](results/final/evidence/FINAL_LIMITATIONS.md).
 
-Para números, hashes e resultados usados no Relatório Final, utilizar os
-manifests e summaries anexados à release da tag, e não valores copiados
-manualmente de execuções anteriores.
+## 8. Bibliografia, autoria e histórico
+
+**Autoria e formulação de pesquisa:** Daniel Santos Baptista — Iniciação Científica iniciada em fevereiro de 2026.
+
+**Documentos autorais prioritários:** *Relatório Parcial de Atividades — IC 2026* e *Modelagem e Quantificação do Agente Causal*. Esses materiais registram a evolução conceitual; não foram automaticamente tratados como evidência de validação de hipóteses.
+
+**Fundamentos de referência:**
+- Nielsen, M. A.; Chuang, I. L. *Quantum Computation and Quantum Information*. Cambridge University Press, 2010.
+- Breuer, H.-P.; Petruccione, F. *The Theory of Open Quantum Systems*. Oxford University Press, 2002.
+- Baumgratz, T.; Cramer, M.; Plenio, M. B. “Quantifying Coherence”. *Physical Review Letters* **113**, 140401 (2014).
+
+**Documentação científica do projeto:** [formalismo](docs/MATHEMATICAL_MAPPING.md) · [protocolo de coleta](docs/CAUSAL_AGENT_COLLECTION_PROTOCOL.md) · [auditoria final](docs/FINAL_CODE_SCIENTIFIC_AUDIT.md) · [auditoria físico-causal](docs/PHYSICAL_CAUSAL_AGENTS_AUDIT.md).
+
+**Histórico reprodutível:** [Pull Requests](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/pulls?q=is%3Apr) · [GitHub Actions](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/actions) · [Releases](https://github.com/DanielBaptista01/IC-Computacao_Cientifica/releases).
+
+---
+
+**Princípio metodológico da IC:** problema → hipótese → modelo → implementação → testes → experimento → dados → análise crítica. A contribuição autoral é uma **hipótese de organização e caracterização causal** investigada numericamente, e não uma alegação de solução universal para a decoerência.
