@@ -23,7 +23,11 @@ $$
 \longrightarrow
 \underbrace{\rho'_k}_{\text{estado resultante}}
 \longrightarrow
-\underbrace{\left\{N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots\right\}}_{\text{assinatura operacional}}.
+\underbrace{\Sigma_{k,t}}_{\text{assinatura operacional}}.
+$$
+
+$$
+\Sigma_{k,t}=(N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots).
 $$
 
 A tríade **não** deve ser interpretada como uma lei de causa única: múltiplos mecanismos podem atuar conjuntamente e seus efeitos podem não ser aditivos ou separáveis apenas pelo qubit observado.
@@ -34,12 +38,12 @@ Para uma condição inicial sem correlações sistema–ambiente e um ambiente f
 
 $$
 \rho'_{S,k}(t)=
-\operatorname{Tr}_E\!\left[
+\mathrm{Tr}_E\![
 U_{SE}^{(k)}(t)\,
-\left(\rho_S(0)\otimes\rho_E(0)\right)
+(\rho_S(0)\otimes\rho_E(0))
 U_{SE}^{(k)\dagger}(t)
-\right]
-=\mathcal{E}_{k,t}\!\left(\rho_S(0)\right).
+]
+=\mathcal{E}_{k,t}\!(\rho_S(0)).
 $$
 
 Nessas hipóteses, a aplicação $\mathcal{E}_{k,t}$ é um canal CPTP e pode admitir representação de Kraus. Essa representação descreve o **efeito reduzido**, mas não determina unicamente a identidade microscópica da fonte. Na presença de correlações iniciais, memória ou dependências de intervenções anteriores, a atribuição de um canal CPTP independente por intervalo exige hipóteses adicionais.
@@ -47,7 +51,7 @@ Nessas hipóteses, a aplicação $\mathcal{E}_{k,t}$ é um canal CPTP e pode adm
 Para definir *ruído observado*, precisamos especificar a **evolução ideal de referência** $\mathcal{G}_t$:
 
 $$
-\rho_{\mathrm{ideal}}(t)=\mathcal{G}_t\!\left(\rho_S(0)\right),
+\rho_{\mathrm{ideal}}(t)=\mathcal{G}_t\!(\rho_S(0)),
 \qquad
 \delta\rho_k(t)=\rho'_{S,k}(t)-\rho_{\mathrm{ideal}}(t).
 $$
@@ -56,10 +60,10 @@ $\delta\rho_k$ é uma **diferença de operadores**, não um operador densidade. 
 
 $$
 N_k(t;\rho_S(0))\equiv
-D_{\mathrm{tr}}\!\left(\rho'_{S,k}(t),\rho_{\mathrm{ideal}}(t)\right)
-=\frac12\left\|
+D_{\mathrm{tr}}\!(\rho'_{S,k}(t),\rho_{\mathrm{ideal}}(t))
+=\frac12\lVert
 \rho'_{S,k}(t)-\rho_{\mathrm{ideal}}(t)
-\right\|_1.
+\rVert_1.
 $$
 
 A definição de $N_k$ é um **descritor operacional escolhido** para a análise; não pretende reduzir todos os mecanismos de ruído a um único número. Ela depende também do estado de prova, do tempo e do protocolo. Em comparações com dados do corpus, verificar se a referência é o **estado de entrada** ou o **resultado ideal** da operação programada.
@@ -69,7 +73,7 @@ A definição de $N_k$ é um **descritor operacional escolhido** para a análise
 Para o operador densidade do qubit:
 
 $$
-S(\rho)=-\operatorname{Tr}\!\left(\rho\log_2\rho\right),\qquad
+S(\rho)=-\mathrm{Tr}\!(\rho\log_2\rho),\qquad
 \Delta S_k=S(\rho'_{S,k})-S(\rho_S(0)).
 $$
 
@@ -90,9 +94,9 @@ $$
 
 Isso **não** impede que a distância de traço ao alvo ou a fidelidade ao estado ideal indiquem uma perturbação. Portanto, $\Delta S=0$ **não** prova ausência de ruído.
 
-**Caso B — canal não unitário.** A entropia pode aumentar, diminuir ou, em condições específicas, permanecer constante; isso depende do canal e do estado de entrada. Como exemplo analítico didático, um canal de *amplitude damping* com parâmetro $p=1/2$ aplicado a $\rho=I/2$ produz $\rho'=\operatorname{diag}(3/4,1/4)$: a entropia cai de $1$ bit para $H_2(3/4)\approx0{,}811$ bit. Logo, "ruído aumenta a entropia" **não** é uma lei geral.
+**Caso B — canal não unitário.** A entropia pode aumentar, diminuir ou, em condições específicas, permanecer constante; isso depende do canal e do estado de entrada. Como exemplo analítico didático, um canal de *amplitude damping* com parâmetro $p=1/2$ aplicado a $\rho=I/2$ produz $\rho'=\mathrm{diag}(3/4,1/4)$: a entropia cai de $1$ bit para $H_2(3/4)\approx0{,}811$ bit. Logo, "ruído aumenta a entropia" **não** é uma lei geral.
 
-**Medidas complementares:** pureza $P(\rho)=\operatorname{Tr}(\rho^2)$; coerência $C_{\ell_1}(\rho)=\sum_{i\neq j}|\rho_{ij}|$ em base definida; fidelidade a um estado-alvo; distância de traço; espectro e, quando possível, correlações sistema–ambiente. Medir a entropia do subsistema não equivale automaticamente a medir entropia termodinâmica total produzida.
+**Medidas complementares:** pureza $P(\rho)=\mathrm{Tr}(\rho^2)$; coerência $C_{\ell_1}(\rho)=\sum_{i\neq j}|\rho_{ij}|$ em base definida; fidelidade a um estado-alvo; distância de traço; espectro e, quando possível, correlações sistema–ambiente. Medir a entropia do subsistema não equivale automaticamente a medir entropia termodinâmica total produzida.
 
 ## 4. Evidência disponível na implementação
 

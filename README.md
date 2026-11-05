@@ -21,7 +21,11 @@ $$
 \xrightarrow{\;\rho_S(0)\;}
 \underbrace{\rho'_{S,k}(t)}_{\text{estado resultante}}
 \xrightarrow{\;\text{comparação e métricas}\;}
-\underbrace{\left\{N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots\right\}}_{\text{assinatura observável}}.
+\underbrace{\Sigma_{k,t}}_{\text{assinatura observável}}.
+$$
+
+$$
+\Sigma_{k,t}=(N_k,\Delta S_k,\Delta P_k,\Delta C_k,F_k,\ldots).
 $$
 
 Aqui, o **ruído** é caracterizado operacionalmente pelo desvio em relação à evolução ideal, enquanto a **entropia** é apenas uma das métricas da resposta do estado. **Uma perturbação pode existir com $\Delta S=0$**; aumento de entropia não é consequência universal de todo ruído. A caracterização conjunta é um objetivo científico da IC, **não uma prova automática da identidade do agente**.
@@ -160,12 +164,12 @@ $$
 
 $$
 N_k(t)=\frac{1}{2}
-\left\|\rho'_{S,k}(t)-\rho_{\mathrm{ideal}}(t)\right\|_1,
+\lVert\rho'_{S,k}(t)-\rho_{\mathrm{ideal}}(t)\rVert_1,
 \qquad
 \Delta S_k=S(\rho'_{S,k}(t))-S(\rho_S(0)),
 $$
 
-com $S(\rho)=-\operatorname{Tr}(\rho\log_2\rho)$. **$N_k$ é um descritor operacional de ruído proposto para comparação**, não uma definição universal de todo ruído quântico; $\Delta S_k$ também depende da entrada, do tempo e do processo. Quando a evolução ideal não preserva entropia, deve-se comparar a entropia com $S(\rho_{\mathrm{ideal}})$ separadamente.
+com $S(\rho)=-\mathrm{Tr}(\rho\log_2\rho)$. **$N_k$ é um descritor operacional de ruído proposto para comparação**, não uma definição universal de todo ruído quântico; $\Delta S_k$ também depende da entrada, do tempo e do processo. Quando a evolução ideal não preserva entropia, deve-se comparar a entropia com $S(\rho_{\mathrm{ideal}})$ separadamente.
 
 **Resultado computacional importante:** no controle longitudinal coerente e unitário do corpus v1, o maior $|\Delta S|$ foi $8{,}00856626\times10^{-16}$ (compatível com zero numérico), enquanto a maior distância de traço **ao estado de entrada** alcançou $1$. Esses extremos são obtidos no conjunto de condições amostradas e não precisam corresponder à mesma observação.
 
